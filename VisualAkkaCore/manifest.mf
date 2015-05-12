@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.vap.core
+OpenIDE-Module-Localizing-Bundle: org/vap/core/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

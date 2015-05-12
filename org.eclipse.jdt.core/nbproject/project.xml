@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.apisupport.project</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/nb-module-project/3">
+            <code-name-base>org.eclipse.jdt.core</code-name-base>
+            <suite-component/>
+            <module-dependencies/>
+            <public-packages>
+                <package>org.eclipse.jdt.core</package>
+                <package>org.eclipse.jdt.core.compiler</package>
+                <package>org.eclipse.jdt.core.compiler.batch</package>
+                <package>org.eclipse.jdt.internal.compiler</package>
+                <package>org.eclipse.jdt.internal.compiler.ast</package>
+                <package>org.eclipse.jdt.internal.compiler.batch</package>
+                <package>org.eclipse.jdt.internal.compiler.classfmt</package>
+                <package>org.eclipse.jdt.internal.compiler.codegen</package>
+                <package>org.eclipse.jdt.internal.compiler.env</package>
+                <package>org.eclipse.jdt.internal.compiler.flow</package>
+                <package>org.eclipse.jdt.internal.compiler.impl</package>
+                <package>org.eclipse.jdt.internal.compiler.lookup</package>
+                <package>org.eclipse.jdt.internal.compiler.parser</package>
+                <package>org.eclipse.jdt.internal.compiler.parser.diagnose</package>
+                <package>org.eclipse.jdt.internal.compiler.problem</package>
+                <package>org.eclipse.jdt.internal.compiler.util</package>
+            </public-packages>
+            <class-path-extension>
+                <runtime-relative-path>ext/org.eclipse.jdt.core-3.8.2.v20130121.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/org.eclipse.jdt.core-3.8.2.v20130121.jar</binary-origin>
+            </class-path-extension>
+        </data>
+    </configuration>
+</project>

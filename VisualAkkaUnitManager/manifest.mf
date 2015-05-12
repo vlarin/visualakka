@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.vap.unitmananger
+OpenIDE-Module-Install: org/vap/unitmananger/Installer.class
+OpenIDE-Module-Localizing-Bundle: org/vap/unitmananger/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

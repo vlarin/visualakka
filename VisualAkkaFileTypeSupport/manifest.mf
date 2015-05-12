@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.vap.filetypesupport
+OpenIDE-Module-Localizing-Bundle: org/vap/filetypesupport/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

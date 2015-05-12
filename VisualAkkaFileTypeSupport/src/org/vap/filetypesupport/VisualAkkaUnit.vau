@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+-->
+
+<Workspace>
+    <refModuleName>default</refModuleName>
+    <refModulePackage>test</refModulePackage>
+    <layers>
+        <methodName>Default</methodName>
+        <entries>
+            <cmID>0</cmID>
+            <loc>
+                <x>1</x>
+                <y>1</y>
+            </loc>
+            <refArg>
+                <name>Default</name>
+                <fixed>false</fixed>
+                <type>String</type>
+                <isMainArg>true</isMainArg>
+            </refArg>
+        </entries>
+        <connections/>
+    </layers>
+    <connections>
+    </connections>
+</Workspace>
