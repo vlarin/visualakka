@@ -4,8 +4,10 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 Основы
 ======
 
-Здесь будут описаны все основные функциональные части интерфейса и ихние
-свойства.
+Установка
+---------
+
+Для использования плагина необходимо распаковать VisualAkkaPlug-in.zip и подключить все модули к NetBeans 
 
 Рабочая область
 ---------------
