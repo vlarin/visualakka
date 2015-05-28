@@ -16,7 +16,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 функциональные объекты, а гранями – связи между ними. Отображается во кладке
 “Visual’ открытого в NetBeans vau-файла.
 
-![](<http://c2n.me/3huYlS9.jpg>)
+![](<http://avisualistic.com/images/git/1.png>)
 
 *Вид базовой рабочей области*
 
@@ -31,7 +31,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 данной панели можно перемещаться по рабочей сцене, перетаскивая вышеупомянутый
 прямоугольник.
 
-![](<http://c2n.me/3huYhpz.jpg>)
+![](<http://avisualistic.com/images/git/2.png>)
 
 *Вид панели навигации*
 
@@ -42,7 +42,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 несколько методов. Для работы с методами предназначена область панели
 инструментов в редакторе vau-файлов.
 
-![](<http://c2n.me/3huYb9O.jpg>)
+![](<http://avisualistic.com/images/git/3.png>)
 
 *Панель инструментов vau-файла (подчеркнутая область – блок инструментов для
 работы с методами)*
@@ -67,7 +67,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 метода. Каждый метод должен иметь как минимум один главный вход, имя которого
 совпадает с именем метода; удалить данный вход нельзя.
 
-![](<http://c2n.me/3huY6xh.png>)
+![](<http://avisualistic.com/images/git/4.png>)
 
 *Вид входа*
 
@@ -101,7 +101,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 выходов; в зависимости от пути выполнения на некоторые выходы могут попасть
 сигналы, а на некоторые – нет.
 
-![](<http://c2n.me/3huY1Ja.jpg>)
+![](<http://avisualistic.com/images/git/5.png>)
 
 *Вид выхода*
 
@@ -133,7 +133,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 переданными в Creator данного актора. Экземпляры являются основными
 композиционными элементами Visual Akka.
 
-![](<http://c2n.me/3huXWcz.jpg>)
+![](<http://avisualistic.com/images/git/6.png>)
 
 *Вид экземпляра метода*
 
@@ -158,7 +158,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 из иерархического дерева окна Units на рабочую область (Окно Units вызывается
 путем Окно-UnitsView)
 
-![](<http://c2n.me/3huXREy.jpg>)
+![](<http://avisualistic.com/images/git/7.png>)
 
 *Вид окна “Units”*
 
@@ -197,7 +197,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 пользователь должен создать сигнатуру метода. Основные поля, которые потребуется
 заполнить, это Method name, Entries, и Outputs.
 
-![](<http://c2n.me/3huXLX2.jpg>)
+![](<http://avisualistic.com/images/git/8.png>)
 
 *Вид пользовательского метода*
 
@@ -214,7 +214,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 данный момент палитра содержит только раздел “New”, в котором находятся три
 пункта: “Entry”, “Exit”, “User code block”
 
-![](<http://c2n.me/3huXEcC.png>)
+![](<http://avisualistic.com/images/git/9.png>)
 
 *Вид окна палитры*
 
@@ -232,7 +232,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 состояний на рабочую область можно создать установщик состояния, который
 переведет модуль в соответствующее состояние.
 
-![](<http://c2n.me/3huXAo8.png>)
+![](<http://avisualistic.com/images/git/10.png>)
 
 *Вид окна состояний*
 
@@ -242,7 +242,7 @@ Netbeans Plugin for visual programming and prototyping actors in Akka with immer
 соответствующее состояние. Создается путем перетаскивания элемента списка из
 окна “States”
 
-![](<http://c2n.me/3huYu4X.jpg>)
+![](<http://avisualistic.com/images/git/11.png>)
 
 *Вид установщика состояния*
 
@@ -317,6 +317,6 @@ Vladislav Larin, vlarinmain@gmail.com
 
 Oleg Bantysh, iambantysh@gmail.com
 
-Serhii Biletskij, shutclare@gmail.com
+Serhii Biletskyi, shutclare@gmail.com
 
 All rights reserved.
