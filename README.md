@@ -1,272 +1,205 @@
 # Akka Visual Extention
 Netbeans Plugin for visual programming and prototyping actors in Akka with immersive possibilities
 
-Основы
+Basics
 ======
 
-Установка
+Install
 ---------
 
-Для использования плагина необходимо распаковать VisualAkkaPlug-in.zip и подключить все модули к NetBeans 
+Unpack VisualAkkaPlug-in.zip and import all modules to the NetBeans
 
-Рабочая область
+Workspace
 ---------------
 
-Основная рабочая область – граф-ориентированная сцена, где узлами являются
-функциональные объекты, а гранями – связи между ними. Отображается во кладке
-“Visual’ открытого в NetBeans vau-файла.
+Main workspace is graph-oriented scene, where nodes are functional objects and edges are connections between them. It can be seen in “Visual” tab of editor window for vau-file in NetBeans.
 
 ![](<http://avisualistic.com/images/git/1.png>)
 
-*Вид базовой рабочей области*
+*View of basic workspace*
 
-Все объекты рабочей области можно перетаскивать (за область заголовка). Сцена
-масштабируется при помощи зажатой клавиши Ctrl и движениям колесика мыши.
+All objects of workspace can be dragged (via dragging title part of widgets). Scene can be zoomed with Ctrl + mouse wheel.
 
-### Панель навигации
+### Navigation panel
 
-Во время работы с рабочей областью vau-файла, в навигаторе NetBeans
-(Окно-Навигатор/Ctrl + 7) отображается миниатюрный вид сцены. В рамках этого
-вида прямоугольник с толстыми контурами обозначает видимую область. С помощью
-данной панели можно перемещаться по рабочей сцене, перетаскивая вышеупомянутый
-прямоугольник.
+While working with workspace of vau-file, the satellite view of this scene is displayed in NetBeans Navigation window (Window-Navigation/Ctrl + 7). Within this view bold-bordered rectangle represents viewed space. Navigation within workspace can be done via drag of this rectangle.
 
 ![](<http://avisualistic.com/images/git/2.png>)
 
-*Вид панели навигации*
+*View of navigation panel*
 
-Методы
+Methods
 ------
 
-Согласно принципам Visual Akka, каждый функциональный модуль может иметь
-несколько методов. Для работы с методами предназначена область панели
-инструментов в редакторе vau-файлов.
+According to the concepts of Visual Akka, each functional unit can have few methods. A special toolbar in vau-file editor is used to work with these methods. 
 
 ![](<http://avisualistic.com/images/git/3.png>)
 
-*Панель инструментов vau-файла (подчеркнутая область – блок инструментов для
-работы с методами)*
+*Vau-file toolbar (underlined part – block of tools for work with methods)*
 
-Тут выделяются следующие элементы:
+This toolbar consists of next elements:
 
--   выпадающий список – отображает текущее имя метода и позволяет переключатся
-    между методами данного модуля.
+-   Dropdown list – displays current method name and can be used to switch between methods of current unit.
 
--   кнопка «Новый метод» - позволяет создать новый метод, имя метода вводится в
-    появляющемся диалоговом окне, созданный метод автоматически будет выбран как
-    «текущий»
+-   “New method” button – allows creating new method, method name is entered in referenced dialog window. This new method will be set as current method.
 
--   кнопка «Удалить метод» удаляет текущий выбранный метод. Внимание: пока что
-    удаление метода не ведет к удалению всех экземпляров этого метода в модулях
-    проекта! (см. ниже)
+-   “Delete method” button deletes current selected method.  Attention: method deletion does not leads to deletion of all instances of this method in units of project!  (see below)
 
-Входы
+Entries
 -----
 
-Вход – функциональный объект, отвечающий за определенный аргумент/константу
-метода. Каждый метод должен иметь как минимум один главный вход, имя которого
-совпадает с именем метода; удалить данный вход нельзя.
+Entry is functional object, which stands for representing of particular argument/constant of method. Each method has to have at least one main entry, whose name matches the name of the method; this entry can’t be deleted.
 
 ![](<http://avisualistic.com/images/git/4.png>)
 
-*Вид входа*
+*Entry view*
 
-Визуально вход является виджетом, который состоит из следующих элементов:
+Entry is represented as widget, which consists of next parts:
 
--   Имени входа
+-   Name of entry
 
--   Поля входа, которое содержит тип входа и так называемого «узла связи»
+-   Entry field, which contains entry type and connection pin.
 
-Создание нового входа происходит путем перетаскивания из палитры (см. ниже)
-элемента “New entry” на рабочую область.
+New entry can be created via dragging “New entry” element from palette (see below) to workspace.
 
-При выборе входа в окне свойств NetBeans (Окно-IDE и
-сервис-Свойства/Ctrl+Shift+7) отображаются следующие свойства:
+While selecting entry, NetBeans Properties window (Window-IDE and service-Properties/Ctrl+Shift+7) displays next properties:
 
-| Название     | Описание
+| Name         | Description
 ---------------|---------
-| Name         | Имя входа
-| Type         | Тип входа; должен представлять собой полную сигнатуру класса Java
-| IsMainArg    | Является ли вход главным; поле только для чтения
-| IsFixed      | Является ли этот вход аргументом метода или константой (константа – true)
-| DefaultValue | В случае, если вход является константой, содержит ее значение.
+| Name         | Entry name
+| Type         | Entry type; has to be full signature of Java class
+| IsMainArg    | Is this entry main; read-only
+| IsFixed      | Is this entry argument or constant (constant– true)
+| DefaultValue | In case of entry is constant contains its value.
 
-Вход можно удалить, нажав по нему правой кнопкой мыши и выбрать пункт “Delete”
+Entry can be deleted via right mouse button click and choosing “Delete” option.
 
-Выходы
+Exits
 ------
 
-Выход – функциональный элемент, отвечающий за возвращение результата метода. В
-отличии от методов Java, методы модулей Visual Akka могут иметь несколько
-выходов; в зависимости от пути выполнения на некоторые выходы могут попасть
-сигналы, а на некоторые – нет.
+Exit is functional object, which stands for representing of particular returning value of method.Выход – функциональный элемент, отвечающий за возвращение результата метода. In contrast to Java methods, methods of Visual Akka can have few exits; depending on the execution path some exits can get signals and some - no. 
 
 ![](<http://avisualistic.com/images/git/5.png>)
 
-*Вид выхода*
+*Exit view*
 
-Визуально выход является виджетом, который состоит из следующих элементов:
+Entry is represented as widget, which consists of next parts:
 
--   Имени выхода
+-   Name of exit
 
--   Поля выхода, которое содержит тип выхода и так называемого «узла связи»
+-   Exit field, which contains entry type and connection pin.
 
-Создание нового выхода происходит путем перетаскивания из палитры (см. ниже)
-элемента “New exit” на рабочую область.
+New entry can be created via dragging “New exit” element from palette (see below) to workspace.
 
-При выборе входа в окне свойств NetBeans (Окно-IDE и
-сервис-Свойства/Ctrl+Shift+7) отображаются следующие свойства:
+While selecting exit, NetBeans Properties window (Window-IDE and service-Properties/Ctrl+Shift+7) displays next properties:
 
-| Название | Описание
+| Name     | Description
 -----------|---------
-| Name     | Имя входа
-| Type     | Тип входа; должен представлять собой полную сигнатуру класса Java
+| Name     | Name of exit
+| Type     | Entry type; has to be full signature of Java class
 
-Выход можно удалить, нажав по нему правой кнопкой мыши и выбрать пункт “Delete”
+Exit can be deleted via right mouse button click and choosing “Delete” option.
 
-Экземпляры методов
+Method instances
 ------------------
 
-Экземпляр метода – функциональный элемент, который представляет собой
-«воплощенную» ссылку на метод модуля. В реалиях Акка экземпляр метода – это
-экземпляр сгенерированного java актора akka, с указанными параметрами,
-переданными в Creator данного актора. Экземпляры являются основными
-композиционными элементами Visual Akka.
+Method instance is functional element, which represents instantiated link to unit method. According to the concepts of Akka method instance is the instance of actor class. Methods instances are main compositional elements of Visual Akka.
 
 ![](<http://avisualistic.com/images/git/6.png>)
 
-*Вид экземпляра метода*
+*Method instance view*
 
-Визуально экземпляр метода является виджетом, который состоит из следующих
-элементов:
+Method instance is represented as widget, which consists of next parts:
 
--   Имени метода, на который ссылается данный экземпляр
+-   Method name, which this instance refers on
 
--   Поля роутера, который кратко отображает информацию о привязанном роутере
-    (если он есть), или сообщает об его отсутствии
+-   Router field which briefly displays information about linked router(if it exists), or informs about its absence
 
--   Одного или более поля аргумента, которые состоят из «узла связи», названия
-    аргумента и его типа
+-   One or more argument field, which contains connection pin, argument name and type 
 
--   Нескольких полей констант (если они есть), которые состоят из названия
-    константы, ее типа и установленного значения
+-   Few constant fields(if they exists), which contain constant name, type and set 
 
--   Нескольких полей выходов (если они есть), которые состоят из его названия,
-    типа и «узла связи»
+-   Few exits fields(if they exists), which contain exit name, type and connection pin 
 
-Создание экземпляра метода происходит путем перетаскивания узла-названия метода
-из иерархического дерева окна Units на рабочую область (Окно Units вызывается
-путем Окно-UnitsView)
+Method instance can be created via dragging method name node from hierarchical tree view of Units window to workspace (Units window is called via Window-UnitsView menu)
 
 ![](<http://avisualistic.com/images/git/7.png>)
 
-*Вид окна “Units”*
+*View of “Units” window*
 
-При выборе входа в окне свойств NetBeans (Окно-IDE и
-сервис-Свойства/Ctrl+Shift+7) отображаются следующие свойства:
+While selecting method instance, NetBeans Properties window (Window-IDE and service-Properties/Ctrl+Shift+7) displays next properties:
 
-| Название                        | Описание
+| Name                            | Description
 ----------------------------------|---------
-| Default values                  | Раздел с наборами пар-значений, отвечающий за установку констант
-| Supervising                     | Раздел настройки супервизинга
-| Supervisor strategy             | Тип стратегии супервизинга (подробнее в референсе akka)
-| Within time range               | Временной интервал по истечению которого происходит перезапуск актора в случае  исключительной ситуации
-| Max Number of reties            | Максимальное количество перезапусков
-| Routing                         | Раздел настройки роутинга
-| Enabled                         | Включен ли роутинг для этого экземпляра
-| Routing logic                   | Тип логики роутинга, подробнее в референсе akka
-| Stretching                      | Включить ли поддержку гибкого роутинга (на данный момент не поддерживается)
-| Routes amount(min + max routes) | Минимальное и максимальное количество  экземпляров
-| Max mailbox capacity            | Максимальный размер очереди сообщений  (akka mailbox) после которой происходит расширение роутера
+| Default values                  | Part with key-value pairs, which stands for setting constants
+| Supervising                     | Part for setting up supervising
+| Supervisor strategy             | Supervisor strategy type  (see akka reference)
+| Within time range               | Time interval between actor restarts in case of exception
+| Max Number of reties            | Maximal number of reties 
+| Routing                         | Part for setting up routing
+| Enabled                         | Is the routing enabled for this instance
+| Routing logic                   | Routing logic type  (see akka reference)
+| Stretching                      | Is flexible (stretched) routing enabled (not yet implemented)
+| Routees amount(min + max routes)| Routees amount (minimal and maximal amount)
+| Max mailbox capacity            | If mailbox capacity is greater than this value then flexible router stretches
 
-В отличии от входов и выходов, экземпляр метода можно скопировать в другой метод
-модуля (посредством контекстного меню); в таком случае сообщения будут
-пересылаться именно этому экземпляру. Также, как и прочий объект рабочей
-области, экземпляр метода можно удалить через контекстное меню.
+In contrast to the entries and exits, method instances can be copied to another method of unit (via context menu); in that case, messages will be sent exactly to this instance. In addition, like other workspace object, method instance can be deleted through context menu. 
 
-Пользовательские методы
+User code blocks
 -----------------------
 
-Пользовательские методы предоставляют интерфейс для исполнения произвольного
-пользовательского кода в рамках модулей Visual Akka. При создании данных
-объектов будут сгенерированы соответствующие классы заглушки (с полностью
-настроенным роутингом), в рамках которых пользователь должен будет написать
-логику созданного метода. Пользовательские методы создаются из палитры
-посредством перетаскивания из палитры (см. ниже) элемента “New User Code Block”
-на рабочую область. При этом будет вызван помощник, в ходе работы с которым
-пользователь должен создать сигнатуру метода. Основные поля, которые потребуется
-заполнить, это Method name, Entries, и Outputs.
+User code blocks represent interface for custom user code execution within Visual Akka units. Creation of these objects will cause generation of appropriate stub classes (with fully configured routing). User should implement custom logic within these generated classes. User code blocks can be created via dragging “New User Code Block” element from palette (see below) to workspace. A wizard will be called, and during work with this wizard user will have to create method signature. Method name, Entries and Outputs are main fields to be filled.
 
 ![](<http://avisualistic.com/images/git/8.png>)
 
-*Вид пользовательского метода*
+*User code block view*
 
-В остальном работа с созданным пользовательским методом (в рамках визуальной
-сцены) ничем не отличается от работы с экземплярами методов. Свойства роутинга,
-супервизинга и работа с константами остается прежней.
+There is no difference between work with User Code Blocks and Method Instances in the rest of cases. Properties of routing, supervising and work with the constants remain the same.
 
-Палитра
+Palette
 -------
 
-Палитра – элемент интерфейса (окно), предназначенное для быстрой и удобной
-работы при создании новых объектов рабочей области Visual Akka. Все объекты
-создаются путем перетаскивания соответствующих пунктов на рабочую область. На
-данный момент палитра содержит только раздел “New”, в котором находятся три
-пункта: “Entry”, “Exit”, “User code block”
+Palette – window, which is used for quick and  easy creation of new Visual Akka workspace objects. All objects are created via dragging corresponding elements to workspace. At the moment, the palette contains only the section "New", which contains three points: "Entry", "Exit", "User code block"
 
 ![](<http://avisualistic.com/images/git/9.png>)
 
-*Вид окна палитры*
+*Palette window view*
 
-Состояния
+States
 ---------
 
-Состояния – реализация FSM на akka. Позволяет создавать условные переходы по
-связям в зависимости от состояния, а также выполнять смену состояния на нужное
-при переходе по связи.
+States – FSM implementation. Allows to create state-related transitions, and to change the state of a unit instance.
 
-### Окно состояний
+### States window
 
-Окно состояний (Окно-StatesView) позволяет отслеживать, создавать и удалять
-состояния для данного модуля. С помощью перетаскивания элемента списка окна
-состояний на рабочую область можно создать установщик состояния, который
-переведет модуль в соответствующее состояние.
+States window (Window-StatesView) allows to monitor, create and delete states for current unit. A state setter, which sets unit state to corresponding, can be created via dragging it from window view to workspace. 
 
 ![](<http://avisualistic.com/images/git/10.png>)
 
-*Вид окна состояний*
+*View of “States” window*
 
-### Установщики состояний
+### State setters
 
-Установщик состояния – функциональный элемент, отвечающий за перевод модуля в
-соответствующее состояние. Создается путем перетаскивания элемента списка из
-окна “States”
+State setter is functional element which stands for setting unit state to corresponding. Can be created via dragging element of list of “States” window to workspace. 
 
 ![](<http://avisualistic.com/images/git/11.png>)
 
-*Вид установщика состояния*
+*State setter view*
 
-Визуально установщик состояния является виджетом, который состоит из следующих
-элементов:
+State setter is represented as widget, which consists of next parts:
 
--   Имени состояния
+-   Name of state
 
--   «узла связи»
+-   Connection pin
 
-Связи
+Connections
 -----
 
-Связи – линии, соединяющие выходные и входные «узлы связи» функциональных
-объектов рабочей сцены. Определяют соответствующие потоки передачи сообщений
-между экземплярами акторов. Для каждой связи можно установить фильтр перехода по
-состоянию, путем установки соответствующего пункта из контекстного меню (подменю
-“SetState”)
+Connections – lines, which connect source and target pins of functional objects of workspace. Determine the appropriate data flows. Each connection can have state filter, which can be set from context (submenu “Set State”)
 
-Также предусмотрен механизм извлечения конкретного поля из более сложной
-структуры данных выхода (контекстное меню-подменю ”Extract field”)(на данный
-момент функция недоступна)
+There is also field extraction (if output type is too complex and contains subfields) (context menu-submenu ”Extract field”) (at the moment function is not available)
 
-Сгенерированный код
+Generated code
 ===================
 ```java
 package test;
@@ -287,28 +220,21 @@ public class PowImpl extends test.Pow.UCBAbstract {
   }
 }
 ```
-Все пользовательские блоки кода после генерации кода (которая производится при
-сохранении файла) будут представлены в виде реализаций абстрактный методов
-класса с логикой пользовательских блоков кода.
+All user code blocks are translated into appropriate java code stubs after the code generation (happens on save action)
 
-Практические указания
+Practical tips
 =====================
 
-Создание проекта
+Project creation
 ----------------
 
-Для импорта всех требуемых зависимостей предусмотрен специальный тип проекта
-“Visual Akka project”. Такой проект может быть создан c помощью
-последовательности действий “Создать проект-JavaEE-VisualAkkaProject”. Или же
-создать вручную проект java, и добавить нужные библиотеки самостоятельно.
-Базовый набор библиотек это akka-actor и akka-visual.
+There is special project type “Visual Akka project” which contains all necessary dependencies. This project can be created via “Create project-JavaEE-VisualAkkaProject”. Or it can be done manually in java project via adding all neccessary Visual Akka libraries (dependencies)
+Basic dependencies are akka-actor and akka-visual.
 
-Создание файла модуля
+Unit file creation
 ---------------------
 
-Создать новый файл модуля (“vau”-файл) можно с помощью последовательности
-действий “Файл-Создать файл(Ctrl-N)-Visual Akka- Visual Akka Unit”.
-
+New Visual Akka unit file (“vau”-file) can be created via “File-Create file(Ctrl-N)-Visual Akka- Visual Akka Unit”.
 
 # Licence
 Akka Visual Extention is Open Source and available under the Apache 2 License.
