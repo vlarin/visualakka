@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.openide.util.Lookup;
-import org.vap.core.jaxbadapters.ConcMapAdapter;
 import org.vap.core.model.micro.Argument;
 import org.vap.core.model.micro.Method;
 import org.vap.core.model.micro.Point;

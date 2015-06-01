@@ -20,7 +20,6 @@ import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
-import com.sun.codemodel.JStatement;
 import com.sun.codemodel.JSwitch;
 import com.sun.codemodel.JVar;
 
@@ -32,9 +31,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.eclipse.jdt.internal.compiler.flow.FlowContext;
 import org.openide.util.lookup.ServiceProvider;
 import org.vap.core.Flow;
 
@@ -55,7 +51,6 @@ import org.vap.core.model.macro.VFLayer;
 import org.vap.core.model.macro.Workspace;
 import org.vap.core.model.macro.WorkspaceObject;
 import org.vap.core.model.micro.Argument;
-import org.vap.core.model.micro.Property;
 import org.vap.core.model.micro.Result;
 
 /**

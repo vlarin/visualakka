@@ -9,6 +9,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.core.spi.multiview.CloseOperationState;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.MultiViewElementCallback;
@@ -27,6 +28,8 @@ import org.openide.util.lookup.Lookups;
 import org.openide.util.lookup.ProxyLookup;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
+import org.vap.workspace.StatesViewTopComponent;
+import org.vap.workspace.UnitsPaletteTopComponent;
 import org.vap.workspace.WorkspaceScene;
 import org.vap.workspace.palettesupport.PaletteNodesFactory;
 
@@ -214,9 +217,16 @@ public final class VisualAkkaUnitVisualElement extends TopComponent implements M
         WindowManager.getDefault().findTopComponent("properties").open();
         //statesTC.open();
         try{
-        WindowManager.getDefault().findTopComponent("UnitsViewTopComponent").open();
+        UnitsPaletteTopComponent uptc = (UnitsPaletteTopComponent)WindowManager.getDefault().findTopComponent("UnitsPaletteTopComponent");
+        uptc.open();
+        uptc.UpdateWindow(FileOwnerQuery.getOwner(obj.getPrimaryFile()));
         }catch(Exception e){}
-        WindowManager.getDefault().findTopComponent("StatesViewTopComponent").open();
+        try{
+            StatesViewTopComponent svtc = (StatesViewTopComponent)WindowManager.getDefault().findTopComponent("StatesViewTopComponent");
+            svtc.open();
+            svtc.UpdateWindow(scene);
+        }catch(Exception e){}
+        
         if(scene.satteliteView!=null){
             scene.isInitialized = true;
             scene.satteliteView.pane.setViewportView(scene.createSatelliteView());
@@ -250,6 +260,18 @@ public final class VisualAkkaUnitVisualElement extends TopComponent implements M
      */
     @Override
     public void componentActivated() {
+        WindowManager.getDefault().findTopComponent("properties").open();
+        //statesTC.open();
+        try{
+        UnitsPaletteTopComponent uptc = (UnitsPaletteTopComponent)WindowManager.getDefault().findTopComponent("UnitsPaletteTopComponent");
+        uptc.open();
+        uptc.UpdateWindow(FileOwnerQuery.getOwner(obj.getPrimaryFile()));
+        }catch(Exception e){}
+        try{
+            StatesViewTopComponent svtc = (StatesViewTopComponent)WindowManager.getDefault().findTopComponent("StatesViewTopComponent");
+            svtc.open();
+            svtc.UpdateWindow(scene);
+        }catch(Exception e){}
         if(scene.satteliteView!=null){
             scene.isInitialized = true;
             scene.satteliteView.pane.setViewportView(scene.createSatelliteView());

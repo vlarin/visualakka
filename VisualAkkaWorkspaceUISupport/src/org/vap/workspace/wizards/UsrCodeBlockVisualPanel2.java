@@ -24,7 +24,7 @@ public final class UsrCodeBlockVisualPanel2 extends JPanel {
      */
     public UsrCodeBlockVisualPanel2() {
         initComponents();
-        jList1.addMouseListener(new MouseAdapter() {
+        jList2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList) evt.getSource();
                 if (evt.getClickCount() == 2) {
@@ -48,7 +48,7 @@ public final class UsrCodeBlockVisualPanel2 extends JPanel {
                 }
             }
         });
-        jList2.addMouseListener(new MouseAdapter() {
+        jList1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList) evt.getSource();
                 if (evt.getClickCount() == 2) {

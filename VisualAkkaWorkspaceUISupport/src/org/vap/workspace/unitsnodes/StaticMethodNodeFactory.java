@@ -2,21 +2,22 @@
  */
 package org.vap.workspace.unitsnodes;
 
-import java.io.File;
+import com.sun.source.tree.MethodTree;
 import java.util.ArrayList;
 import java.util.List;
-import org.netbeans.api.project.Project;
 import org.openide.nodes.ChildFactory;
 import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
-import org.vap.ast.AstSingleton;
-import org.vap.core.codegen.ast.AstMethod;
+import org.openide.util.Lookup;
+import org.vap.core.codegen.AbstractCodeParser;
+//import org.vap.ast.AstSingleton;
+//import org.vap.core.codegen.ast.MethodTree;
 
 /**
  *
  * @author Oleg Bantysh
  */
-public class StaticMethodNodeFactory extends ChildFactory<AstMethod> {
+public class StaticMethodNodeFactory extends ChildFactory<MethodTree> {
 
     /**
      *
@@ -24,16 +25,17 @@ public class StaticMethodNodeFactory extends ChildFactory<AstMethod> {
      * @return
      */
     @Override
-    protected boolean createKeys(List<AstMethod> list) {
+    protected boolean createKeys(List<MethodTree> list) {
 
-        ArrayList<AstMethod> methods = new ArrayList<AstMethod>();
+        ArrayList<MethodTree> methods = new ArrayList<MethodTree>();
         try{
-            methods = AstSingleton.getInstance().getMethods();
+            AbstractCodeParser gen = (AbstractCodeParser) Lookup.getDefault().lookup(AbstractCodeParser.class);
+            methods = gen.getMethods();
         }catch(Exception e){
             Exceptions.printStackTrace(e);
         }
         if (methods != null) {
-            for (AstMethod m : methods) {
+            for (MethodTree m : methods) {
                 list.add(m);
             }
         }
@@ -46,7 +48,7 @@ public class StaticMethodNodeFactory extends ChildFactory<AstMethod> {
      * @return
      */
     @Override
-    protected Node createNodeForKey(AstMethod key) {
+    protected Node createNodeForKey(MethodTree key) {
         return new StaticMethodNode(key);
     }
 

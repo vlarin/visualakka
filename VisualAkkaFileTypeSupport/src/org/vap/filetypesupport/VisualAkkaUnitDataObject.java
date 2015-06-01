@@ -7,6 +7,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ProjectUtils;
+import org.netbeans.api.project.Sources;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.netbeans.spi.actions.AbstractSavable;
@@ -190,6 +192,8 @@ public class VisualAkkaUnitDataObject extends MultiDataObject implements Workspa
     }
 
     private void initWorkspace() {
+//        Sources s = ProjectUtils.getSources(FileOwnerQuery.getOwner(this.getPrimaryFile()));
+//        System.out.println(s);
 //        String path = FileOwnerQuery.getOwner(this.getPrimaryFile()).getProjectDirectory().getPath();
 //        if(path!=null&&!path.isEmpty()){
 //            AstSingleton.getInstance().update(new File(path));

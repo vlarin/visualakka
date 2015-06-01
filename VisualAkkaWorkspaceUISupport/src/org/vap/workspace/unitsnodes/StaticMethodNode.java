@@ -2,14 +2,13 @@
  */
 package org.vap.workspace.unitsnodes;
 
+import com.sun.source.tree.MethodTree;
 import java.awt.Image;
 import java.awt.datatransfer.Transferable;
 import java.io.IOException;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
 import org.openide.util.ImageUtilities;
-import org.vap.ast.AstCoreModelAdapter;
-import org.vap.core.codegen.ast.AstMethod;
 import org.vap.core.model.macro.UserCodeBlock;
 import org.vap.core.model.micro.Method;
 
@@ -25,10 +24,10 @@ public class StaticMethodNode extends AbstractNode{
      *
      * @param method
      */
-    public StaticMethodNode(AstMethod method) {
+    public StaticMethodNode(MethodTree method) {
         super(Children.LEAF);   
-        this.setDisplayName(method.name);
-        m = AstCoreModelAdapter.toModelMethod(method);
+        this.setDisplayName(method.getName().toString());
+        m = StaticMethodNode.toModelMethod(method);
     }
     
     /**
@@ -59,6 +58,10 @@ public class StaticMethodNode extends AbstractNode{
     @Override
     public Image getOpenedIcon(int i) {
         return getIcon(i);
+    }
+    
+    public static Method toModelMethod(MethodTree method){
+        return new Method();
     }
     
 }

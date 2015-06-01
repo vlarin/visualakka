@@ -61,8 +61,9 @@ import org.openide.explorer.ExplorerManager;
 import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
+import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
-import org.vap.ast.AstSingleton;
+import org.vap.core.codegen.AbstractCodeParser;
 import org.vap.core.filetype.WorkspaceFile;
 import org.vap.core.model.macro.ConcreticisedMethod;
 import org.vap.core.model.macro.Connection;
@@ -558,10 +559,10 @@ public final class WorkspaceScene extends GraphPinScene<String, String, String> 
                 popup.add(copytoMenu);
                 JMenu extractfieldMenu = new JMenu("Extract field");
 
-//                AbstractCodeParser gen = (AbstractCodeParser) Lookup.getDefault().lookup(AbstractCodeParser.class);
-//                ArrayList<String> fields = gen.getTypeNames();
+                AbstractCodeParser gen = (AbstractCodeParser) Lookup.getDefault().lookup(AbstractCodeParser.class);
+                ArrayList<String> fields = gen.getTypeNames();
                 //Temporary stub with use of singleton, not Lookup            
-                ArrayList<String> fields = AstSingleton.getInstance().getTypeNames();
+//                ArrayList<String> fields = AstSingleton.getInstance().getTypeNames();
 
 //                for (State s : ws.getStates()) {
 //                    fields.add(s.getName());

@@ -2,31 +2,28 @@
  */
 package org.vap.core.codegen;
 
-import java.io.File;
+import com.sun.source.tree.MethodTree;
 import java.util.ArrayList;
-import org.vap.core.codegen.ast.AstType;
 
 /**
  *
- * @author Serhii Biletskyi
+ * @author Oleg Bantysh
  */
 public interface AbstractCodeParser {
 
     /**
      *
-     * @param file
+     * @param projectPath -path to sources of project that should be parsed
      */
-    public void init(File file);
+    public void init(String projectPath);
 
     /**
      *
      * @return
      */
     public ArrayList<String> getTypeNames();
-
-    /**
-     *
-     * @return
-     */
-    public ArrayList<AstType> getTypes();
+    
+    public ArrayList<MethodTree> getMethods();
+    
+    
 }

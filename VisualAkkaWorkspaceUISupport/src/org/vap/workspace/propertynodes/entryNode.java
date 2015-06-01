@@ -6,17 +6,13 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.beans.PropertyEditor;
-import java.beans.PropertyEditorSupport;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import org.openide.explorer.propertysheet.ExPropertyEditor;
 import org.openide.explorer.propertysheet.InplaceEditor;
 import org.openide.explorer.propertysheet.PropertyEnv;
 import org.openide.explorer.propertysheet.PropertyModel;
@@ -25,12 +21,10 @@ import org.openide.nodes.Children;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
-import org.vap.*;
-import org.vap.ast.AstSingleton;
-import org.vap.core.model.macro.ConcreticisedMethod;
+import org.openide.util.Lookup;
+import org.vap.core.codegen.AbstractCodeParser;
 import org.vap.core.model.macro.Connection;
 import org.vap.core.model.macro.Entry;
-import org.vap.core.model.macro.VFLayer;
 import org.vap.workspace.WorkspaceScene;
 
 /**
@@ -104,7 +98,8 @@ public class entryNode extends AbstractNode {
             public Object getValue(String attributeName) {
                 if (attributeName.equals("inplaceEditor")) {
                     try{
-                        availableTypes = AstSingleton.getInstance().getTypeNames();
+                        AbstractCodeParser gen = (AbstractCodeParser) Lookup.getDefault().lookup(AbstractCodeParser.class);
+                        availableTypes = gen.getTypeNames();
                     }catch(Exception e){
                         Exceptions.printStackTrace(e);
                     }                  
