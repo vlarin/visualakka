@@ -1,18 +1,20 @@
-/* 
+/*
  */
+
 package org.vap.workspace.palettesupport;
 
 import java.util.List;
+import org.openide.nodes.AbstractNode;
 import org.openide.nodes.ChildFactory;
+import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 
 /**
  *
  * @author Oleg Bantysh
  */
-public class NewTabNodesFactory extends ChildFactory<Integer>{
-    
-    /**
+public class SelectorsTabNodesFactory extends ChildFactory<Integer>{
+        /**
      *
      * @param list
      * @return
@@ -21,7 +23,6 @@ public class NewTabNodesFactory extends ChildFactory<Integer>{
     protected boolean createKeys(List<Integer> list) {
         list.add(0);
         list.add(1);
-        list.add(2);
         return true;
     }
 
@@ -33,10 +34,10 @@ public class NewTabNodesFactory extends ChildFactory<Integer>{
     @Override
     protected Node createNodeForKey(Integer key) {
         switch(key){
-            case 0: return new NewEntryNode();
-            case 1: return new NewExitNode();
-            case 2: return new NewUCBNode();
+            case 0: return new SelectorSelfNode();
+            case 1: return new SelectorAllNode();
             default: return null;
         }
     }
+
 }

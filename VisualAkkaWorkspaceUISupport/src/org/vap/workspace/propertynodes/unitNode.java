@@ -2,19 +2,7 @@
  */
 package org.vap.workspace.propertynodes;
 
-import java.awt.Component;
-import java.awt.event.ActionListener;
-import java.beans.PropertyEditor;
-import java.beans.PropertyEditorSupport;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
-import org.openide.explorer.propertysheet.ExPropertyEditor;
-import org.openide.explorer.propertysheet.InplaceEditor;
-import org.openide.explorer.propertysheet.PropertyEnv;
-import org.openide.explorer.propertysheet.PropertyModel;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
 import org.openide.nodes.PropertySupport;
@@ -33,6 +21,7 @@ public class unitNode extends AbstractNode {
     public ConcreticisedMethod m;
     private WorkspaceScene ws;
     private Sheet.Set routerSet;
+    private Sheet sheet;
 
     public unitNode(ConcreticisedMethod m, WorkspaceScene ws) {
         super(Children.LEAF);
@@ -43,7 +32,13 @@ public class unitNode extends AbstractNode {
 
     @Override
     protected Sheet createSheet() {
-        Sheet sheet = Sheet.createDefault();
+        sheet = Sheet.createDefault();
+        Sheet.Set genset = Sheet.createPropertiesSet();
+        genset.put(new InstanceTypeProperty());
+        genset.put(new SelectorTypeProperty());
+        genset.setDisplayName("General");
+        genset.setName("General");
+        sheet.put(genset);
         Sheet.Set dvset = Sheet.createPropertiesSet();
         for (String k : m.getProperties().keySet()) {
             Property p = new UnitProperty(k);
@@ -87,6 +82,16 @@ public class unitNode extends AbstractNode {
             }
         }
         sheet.put(routerSet);
+        switch (m.iType) {
+            case New: {
+                sheet.remove(routerSet.getName());
+            }
+            break;
+            case Static: {
+                sheet.put(routerSet);
+            }
+            break;
+        }
         return sheet;
     }
 
@@ -106,27 +111,74 @@ public class unitNode extends AbstractNode {
 
         @Override
         public void setValue(Object t) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-            if(t instanceof String){
-            if (m.getProperties().get(propName) == null || 
-                    !(m.getProperties().get(propName)).equals((String) t)) {
+            if (t instanceof String) {
+                if (m.getProperties().get(propName) == null
+                        || !(m.getProperties().get(propName)).equals((String) t)) {
+                    m.getProperties().put(propName, (String) t);
+                    ws.load();
+                }
                 m.getProperties().put(propName, (String) t);
-                ws.removeAll();
-                ws.initWorkspace();
-                ws.validate();
-            }
-            m.getProperties().put(propName, (String) t);
-            }else{
-                if (m.getProperties().get(propName) == null || 
-                    !(m.getProperties().get(propName)).equals(((org.vap.core.model.micro.Property) t).value)) {
+            } else {
+                if (m.getProperties().get(propName) == null
+                        || !(m.getProperties().get(propName)).equals(((org.vap.core.model.micro.Property) t).value)) {
+                    m.getProperties().put(propName, (String) t);
+                    ws.load();
+                }
                 m.getProperties().put(propName, (String) t);
-                ws.removeAll();
-                ws.initWorkspace();
-                ws.validate();
-            }
-            m.getProperties().put(propName, (String) t);
             }
         }
 
+    }
+
+    public class InstanceTypeProperty extends PropertySupport.ReadWrite {
+
+        public InstanceTypeProperty() {
+            super("Instance type", ConcreticisedMethod.InstancingType.class, "Instance type", "Instance type");
+
+        }
+
+        @Override
+        public Object getValue() throws IllegalAccessException, InvocationTargetException {
+            return m.iType;
+        }
+
+        @Override
+        public void setValue(Object t) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+            if (m.iType != (ConcreticisedMethod.InstancingType) t) {
+                m.iType = (ConcreticisedMethod.InstancingType) t;
+                switch (m.iType) {
+                    case New: {
+                        sheet.remove(routerSet.getName());
+                    }
+                    break;
+                    case Static: {
+                        sheet.put(routerSet);
+                    }
+                    break;
+                }
+                ws.load();
+            }
+        }
+    }
+    
+    public class SelectorTypeProperty extends PropertySupport.ReadWrite {
+
+        public SelectorTypeProperty() {
+            super("Selctor type", ConcreticisedMethod.SelectorType.class, "Selector type", "Selector type");
+        }
+
+        @Override
+        public Object getValue() throws IllegalAccessException, InvocationTargetException {
+            return m.selType;
+        }
+
+        @Override
+        public void setValue(Object t) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+            if (m.selType != (ConcreticisedMethod.SelectorType) t) {
+                m.selType = (ConcreticisedMethod.SelectorType) t;
+                ws.load();
+            }
+        }
     }
 
     public class SupVisStratProperty extends PropertySupport.ReadWrite {
@@ -147,7 +199,7 @@ public class unitNode extends AbstractNode {
         }
 
     }
-    
+
     public class WTRProperty extends PropertySupport.ReadWrite {
 
         public WTRProperty() {
@@ -182,10 +234,10 @@ public class unitNode extends AbstractNode {
         public void setValue(Object t) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             boolean update = m.router.getLogic() != (Router.RouterLogic) t;
             m.router.setLogic((Router.RouterLogic) t);
-            if(update){
+            if (update) {
                 ws.load();
             }
-            
+
         }
 
     }
@@ -218,7 +270,7 @@ public class unitNode extends AbstractNode {
                 update = true;
             }
             m.router.setIsStretched((Boolean) t);
-            if(update){
+            if (update) {
                 ws.load();
             }
         }
@@ -239,7 +291,7 @@ public class unitNode extends AbstractNode {
         public void setValue(Object t) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             boolean update = m.router.getMinRoutes() != (Integer) t;
             m.router.setMinRoutes((Integer) t);
-            if(update){
+            if (update) {
                 ws.load();
             }
         }
@@ -260,12 +312,12 @@ public class unitNode extends AbstractNode {
         public void setValue(Object t) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             boolean update = m.router.getMaxRoutes() != (Integer) t;
             m.router.setMaxRoutes((Integer) t);
-            if(update){
+            if (update) {
                 ws.load();
             }
         }
     }
-    
+
     public class MaxNumRetriesProperty extends PropertySupport.ReadWrite {
 
         public MaxNumRetriesProperty() {
@@ -283,7 +335,7 @@ public class unitNode extends AbstractNode {
             m.maxnumofretr = (Integer) t;
         }
     }
-    
+
     public class MaxMBCapacityProperty extends PropertySupport.ReadWrite {
 
         public MaxMBCapacityProperty() {
@@ -358,7 +410,7 @@ public class unitNode extends AbstractNode {
                 m.router = null;
                 update = true;
             }
-            if(update){
+            if (update) {
                 ws.load();
             }
         }

@@ -47,7 +47,8 @@ public class UnitWidget extends Widget {
         addChild(methodName);
         Widget pinsSeparator = new SeparatorWidget(scene, SeparatorWidget.Orientation.HORIZONTAL);
         addChild(pinsSeparator);
-        if (m.router != null) {
+        addChild(new LabelWidget(this.getScene(), m.iType.name()));
+        if (m.router != null && m.iType==ConcreticisedMethod.InstancingType.Static) {
             Widget routerWidget = new Widget(scene);
             routerWidget.setLayout(LayoutFactory.createHorizontalFlowLayout(LayoutFactory.SerialAlignment.JUSTIFY, 4));
             routerWidget.addChild(new LabelWidget(this.getScene(), m.router.getLogic().name()));
@@ -60,11 +61,12 @@ public class UnitWidget extends Widget {
             addChild(routerWidget);
             Widget pinsSeparator1 = new SeparatorWidget(scene, SeparatorWidget.Orientation.HORIZONTAL);
             addChild(pinsSeparator1);
-        } else {
-            LabelWidget noRouter = new LabelWidget(this.getScene(), "(no router)");
-            noRouter.setAlignment(LabelWidget.Alignment.CENTER);
-            addChild(noRouter);
-        }
+        } 
+//        else {
+//            LabelWidget noRouter = new LabelWidget(this.getScene(), "(no router)");
+//            noRouter.setAlignment(LabelWidget.Alignment.CENTER);
+//            addChild(noRouter);
+//        }
 
         Widget methodField = new Widget(this.getScene());
         methodField.setLayout(LayoutFactory.createVerticalFlowLayout(LayoutFactory.SerialAlignment.JUSTIFY, 4)); // use vertical layout

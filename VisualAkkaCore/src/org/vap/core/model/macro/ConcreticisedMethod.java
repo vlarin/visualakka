@@ -57,6 +57,10 @@ public class ConcreticisedMethod extends WorkspaceObject implements Transferable
          */
         StaticMethod
     };
+    
+    public enum InstancingType{Static, New};
+    
+    public enum SelectorType{None, Self, All};
 
     /**
      * @return the refMeth
@@ -142,6 +146,10 @@ public class ConcreticisedMethod extends WorkspaceObject implements Transferable
      */
     public CMType type = CMType.ConcreticisedMethod;
     //public HashMap<String, String> propertiesToSave = new HashMap();
+    
+    public InstancingType iType = InstancingType.Static;
+    
+    public SelectorType selType = SelectorType.None;
 
     /**
      *

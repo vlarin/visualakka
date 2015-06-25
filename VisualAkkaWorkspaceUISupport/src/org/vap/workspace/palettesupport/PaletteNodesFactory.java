@@ -12,7 +12,7 @@ import org.openide.nodes.Node;
  *
  * @author Oleg Bantysh
  */
-public class PaletteNodesFactory extends ChildFactory<Integer>{
+public class PaletteNodesFactory extends ChildFactory<Integer> {
 
     /**
      *
@@ -22,6 +22,7 @@ public class PaletteNodesFactory extends ChildFactory<Integer>{
     @Override
     protected boolean createKeys(List<Integer> list) {
         list.add(0);
+        list.add(1);
         return true;
     }
 
@@ -32,13 +33,20 @@ public class PaletteNodesFactory extends ChildFactory<Integer>{
      */
     @Override
     protected Node createNodeForKey(Integer key) {
-        if(key==0){
-            Node n = new AbstractNode(Children.create(new NewTabNodesFactory(), true));
-            n.setDisplayName("New");
-            return n;
-        }else{
-            return null;
+        switch (key) {
+            case 0: {
+                Node n = new AbstractNode(Children.create(new NewTabNodesFactory(), true));
+                n.setDisplayName("New");
+                return n;
+            }
+            case 1: {
+                Node n = new AbstractNode(Children.create(new SelectorsTabNodesFactory(), true));
+                n.setDisplayName("Selectors");
+                return n;
+            }
+            default:
+                return null;
         }
     }
-    
+
 }

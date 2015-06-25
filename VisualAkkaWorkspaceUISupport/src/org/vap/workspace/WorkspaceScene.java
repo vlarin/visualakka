@@ -78,12 +78,14 @@ import org.vap.core.model.micro.Argument;
 import org.vap.core.model.micro.Method;
 import org.vap.core.model.micro.Result;
 import org.vap.core.model.macro.WorkspaceObject;
+import org.vap.core.model.micro.Module;
 import org.vap.workspace.propertynodes.entryNode;
 import org.vap.workspace.propertynodes.exitNode;
 import org.vap.workspace.propertynodes.stsetterNode;
 import org.vap.workspace.propertynodes.unitNode;
 import org.vap.workspace.transferhandlers.EntryButton;
 import org.vap.workspace.transferhandlers.ExitButton;
+import org.vap.workspace.transferhandlers.SelfButton;
 import org.vap.workspace.transferhandlers.UCBButton;
 import org.vap.workspace.widgets.ConnectionStateDisplayerWidget;
 import org.vap.workspace.widgets.EntryWidget;
@@ -657,14 +659,17 @@ public final class WorkspaceScene extends GraphPinScene<String, String, String> 
                 }
             }
 
+            @Override
             public boolean hasCustomTargetWidgetResolver(Scene scene) {
                 return false;
             }
 
+            @Override
             public Widget resolveTargetWidget(Scene scene, Point sceneLocation) {
                 return null;
             }
 
+            @Override
             public void createConnection(Widget sourceWidget, Widget targetWidget) {
                 SourcePinWidget s = (SourcePinWidget) sourceWidget;
                 TargetPinWidget t = (TargetPinWidget) targetWidget;
@@ -712,7 +717,6 @@ public final class WorkspaceScene extends GraphPinScene<String, String, String> 
         Widget widget = findWidget(pin);
         Anchor a = AnchorFactory.createRectangularAnchor(widget);
         c.setTargetAnchor(a);
-
     }
 
     private class LabelTextFieldEditor implements TextFieldInplaceEditor {
@@ -783,6 +787,22 @@ public final class WorkspaceScene extends GraphPinScene<String, String, String> 
                     //XXX: Savable support
                     file.makeDirty();
                 }
+
+                if (transData instanceof SelfButton) {
+                    Module mod = ws.formModule();
+                    ConcreticisedMethod m = ConcreticisedMethod.formCM(mod.
+                            getMethodByName(ws.getActiveLayer().methodName), mod.toString());
+                    m.selType = ConcreticisedMethod.SelectorType.Self;
+                    dtde.acceptDrop(DnDConstants.ACTION_COPY);
+                    m.loadDefaultProperties(true);
+                    m.setLoc(new org.vap.core.model.micro.Point(dtde.getLocation()));
+                    ws.getActiveLayer().units.add(m);
+                    WorkspaceScene.this.load();
+
+                    //XXX: Savable support
+                    file.makeDirty();
+                }
+
                 if (transData instanceof ExitButton) {
                     Exit e = new Exit();
                     e.setRefRes(new Result());
@@ -990,6 +1010,7 @@ public final class WorkspaceScene extends GraphPinScene<String, String, String> 
         tb.add(currMeth);
         final JComboBox combo = new JComboBox(ws.getMethodNames());
         combo.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 removeAll();
                 ws.setActiveLayer((String) ((JComboBox) e.getSource()).getSelectedItem());
@@ -1041,6 +1062,7 @@ public final class WorkspaceScene extends GraphPinScene<String, String, String> 
         tb.add(mnb);
         delMethBtn = new JButton("Delete method");
         delMethBtn.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 VFLayer l = ws.getActiveLayer();
                 ws.removeLayer(l);
@@ -1058,20 +1080,5 @@ public final class WorkspaceScene extends GraphPinScene<String, String, String> 
             delMethBtn.setEnabled(false);
         }
         tb.add(delMethBtn);
-        JButton compileBtn = new JButton("Compile");
-        compileBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                file.compile();
-            }
-        });
-        tb.add(compileBtn);
-        JButton runBtn = new JButton("Run");
-        runBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                file.compileAndRun();
-            }
-        });
-        tb.add(runBtn);
-
     }
 }
